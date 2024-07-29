@@ -41,7 +41,7 @@ const getNotes = () =>
     }
   });
 
-const saveNote = (note) =>
+const saveNote = (note) => 
   fetch('/api/notes', {
     method: 'POST',
     headers: {
@@ -79,10 +79,13 @@ const renderActiveNote = () => {
 
 const handleNoteSave = () => {
   const newNote = {
+    id: crypto.randomUUID(),
     title: noteTitle.value,
     text: noteText.value
   };
-  
+
+  console.log(JSON.stringify(newNote));
+
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();

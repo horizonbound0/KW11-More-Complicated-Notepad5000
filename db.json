@@ -1,9 +1,11 @@
 [
     {
+        "id":"70",
         "title":"Test Title2",
         "text":"Test text"
     },
     {
+        "id":"71",
         "title":"Test Title4",
         "text":"Test text4"
     }
