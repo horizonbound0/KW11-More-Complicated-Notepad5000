@@ -1,6 +1,9 @@
 // Import express
 const express = require('express');
 
+// Import js
+const fs = require('fs');
+
 // Import db/db.json
 const notes_db = require('./db/db.json');
 
@@ -10,8 +13,8 @@ const path = require('path');
 // Making app function def
 const app = express();
 
-// Temporary port variable
-const PORT = 3001;
+// Port variable for Render
+const PORT = process.env.PORT || 3001;
 
 // req res helper function
 const reqRes = (req, res) => {
@@ -25,7 +28,7 @@ const reqRes = (req, res) => {
 app.use(express.static('public'));
 // Parsing request objects as they come in
 app.use(express.json());
-
+// Same as above, but for URL encoded ones
 app.use(express.urlencoded({ extended: true }));
 
 // Express routes
