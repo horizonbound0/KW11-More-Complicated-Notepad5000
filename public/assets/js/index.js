@@ -1,13 +1,9 @@
-// // Import db/db.json
-// const notes_db = require('../../../db.json');
-
 let noteForm;
 let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
-
 
 if (window.location.pathname === '/notes') {
   noteForm = document.querySelector('.note-form');
@@ -17,7 +13,6 @@ if (window.location.pathname === '/notes') {
   newNoteBtn = document.querySelector('.new-note');
   clearBtn = document.querySelector('.clear-btn');
   noteList = document.querySelectorAll('.list-container .list-group');
-
 }
 
 // Show an element
@@ -79,13 +74,9 @@ const renderActiveNote = () => {
 
 const handleNoteSave = () => {
   const newNote = {
-    id: crypto.randomUUID(),
     title: noteTitle.value,
     text: noteText.value
   };
-
-  console.log(JSON.stringify(newNote));
-
   saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
