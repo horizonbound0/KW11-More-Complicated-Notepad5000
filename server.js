@@ -16,14 +16,6 @@ const app = express();
 // Port variable for Render
 const PORT = process.env.PORT || 3001;
 
-// req res helper function
-// const reqRes = (req, res) => {
-
-//   res.json(`${req.method} request received`);
-//   console.info(req.body);
-//   console.info(`${req.method} request received`);
-// }
-
 // Telling app I have a public folder for static assets
 app.use(express.static('public'));
 // Parsing request objects as they come in
@@ -54,14 +46,8 @@ app.post('/api/notes', (req, res) => {
   // Shove it into our variable array
   currentDB.push(req.body);
 
-  // Show myself that it's been added correctly.
-  console.log(currentDB);
-
   // Reset notes_db
   notes_db = currentDB;
-
-  // Show what's in notes_db now
-  console.log(notes_db);
 
   // Overwrite the notes db
   fs.writeFile('./db/db.json', JSON.stringify(notes_db), (err) =>
@@ -82,10 +68,6 @@ app.delete('/api/notes/:id', (req, res) => {
         err ? console.error(err) : console.log('Success!'));
     }
   }
-
-  console.log(`db.json = ${JSON.stringify(notes_db)}`);
-
-  console.info(req.body);
 
   console.info(`${req.method} was received`);
 
