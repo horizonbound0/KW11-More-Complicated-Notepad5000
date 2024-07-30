@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3001;
 
 // req res helper function
 // const reqRes = (req, res) => {
-  
+
 //   res.json(`${req.method} request received`);
 //   console.info(req.body);
 //   console.info(`${req.method} request received`);
@@ -64,11 +64,24 @@ app.post('/api/notes', (req, res) => {
   console.log(notes_db);
 
   // Overwrite the notes db
-  fs.writeFile('./db/db.json', JSON.stringify(notes_db), (err) => 
-  err ? console.error(err) : console.log('Success!'));
+  fs.writeFile('./db/db.json', JSON.stringify(notes_db), (err) =>
+    err ? console.error(err) : console.log('Success!'));
 });
 
 app.delete('/api/notes/:id', (req, res) => {
+  // Grab ID from request
+  const reqID = req.params.id;
+
+  // loop through the notes and splice out the one that matches.
+  for (let i = 0; i < notes_db.length; ++i) {
+    if (reqID === notes_db[i].id) {
+      notes_db.splice(i, 1);
+
+      // Overwrite the notes db
+      fs.writeFile('./db/db.json', JSON.stringify(notes_db), (err) =>
+        err ? console.error(err) : console.log('Success!'));
+    }
+  }
 
   console.log(`db.json = ${JSON.stringify(notes_db)}`);
 
@@ -78,7 +91,7 @@ app.delete('/api/notes/:id', (req, res) => {
 
 });
 
-app.get('/*', (req, res) => 
+app.get('/*', (req, res) =>
   res.sendFile(path.join(__dirname, 'public/index.html')));
 
 // listen() method is responsible for listening for incoming connections on the specified port 
